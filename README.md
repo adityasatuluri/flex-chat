@@ -1,4 +1,4 @@
-# My Project
+# ![FlexChat-logo](https://github.com/user-attachments/assets/11f1d077-af80-4d9d-9e15-4ff034fa01c5)
 
 This project is a full-stack application built with React, Node.js, Express, and MongoDB. The frontend is managed using Vite, and the backend handles authentication, user profile management, and other API routes.
 
@@ -16,8 +16,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/your-repo.git
-    cd your-repo
+    git clone https://github.com/adityasatuluri/flex-chat.git
+    cd flex-chat
     ```
 
 2. **Install server dependencies:**
@@ -36,17 +36,15 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Running the Project
 
-1. **Start the server:**
-
-    ```bash
+1. **Start the server:** Add ` **"dev":** **"nodemon index.js" ` in ` "scripts"* ` of the ` _package.json_ `  file and run the below command
+    ```bash 
     cd server
-    npm start
+    npm run dev
     ```
 
     The server will start on `http://localhost:6969`.
 
 2. **Start the client:**
-
     ```bash
     cd ../client
     npm run dev
@@ -76,29 +74,21 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Environment Variables
 
-Create a `.env` file in the `server` directory and add the following variables:
+Modify the `.env` file in the `server` directory by changing the following variables:
 
-MONGO_URI=your_mongodb_uri
-JWT_KEY=your_jwt_secret_key
+ - MONGO_URI=your_mongodb_uri
+ - JWT_KEY=your_jwt_secret_key
 
 
-### API Endpoints
+<!-- ### API Endpoints
 
 - **POST** `/api/auth/signup` - User signup
 - **POST** `/api/auth/login` - User login
 - **GET** `/api/auth/user-info` - Get user information (requires token)
-- **POST** `/api/auth/update-profile` - Update user profile (requires token)
+- **POST** `/api/auth/update-profile` - Update user profile (requires token) !-->
 
 ### Additional Information
 
 - Ensure MongoDB is running and accessible from your development environment.
 - Update any relevant configurations in the client and server as needed.
-
-### Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
-### License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
