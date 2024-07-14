@@ -1,16 +1,16 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { IoArrowBack } from "react-icons/io5";
+import { FaPlus, FaTrash } from "react-icons/fa";
+import { toast } from 'sonner';
 import { useAppStore } from '@/store';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { getColor, colors } from '@/lib/utils';
-import React, { useEffect, useState } from 'react';
-import { IoArrowBack } from "react-icons/io5";
-import { FaPlus, FaTrash } from "react-icons/fa";
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
 import { apiClient } from '@/lib/api-client';
-import { UPDATE_PROFILE_ROUTE } from '@/utils/constants';
-import { useNavigate } from 'react-router-dom';
-import Background from '@/assets/flogo-short.svg'
+import { ADD_PROFILE_IMAGE_ROUTE, HOST, REMOVE_PROFILE_IMAGE_ROUTE, UPDATE_PROFILE_ROUTE } from '@/utils/constants';
+import Background from '@/assets/flogo-short.svg';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -20,12 +20,16 @@ const Profile = () => {
   const [image, setImage] = useState(null);
   const [hovered, setHovered] = useState(false);
   const [selectedColor, setSelectedColor] = useState(0);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (userInfo.profileSetup) {
       setFirstName(userInfo.firstName);
       setLastName(userInfo.lastName);
       setSelectedColor(userInfo.color);
+    }
+    if (userInfo.image) {
+      setImage(`${HOST}${userInfo.image}`);
     }
   }, [userInfo]);
 
@@ -68,9 +72,45 @@ const Profile = () => {
     }
   };
 
+  const handleFileInputClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    console.log({ file });
+    if (file) {
+      const formData = new FormData();
+      formData.append("profile-image", file);
+      const response = await apiClient.post(ADD_PROFILE_IMAGE_ROUTE, formData, {
+        withCredentials: true,
+      });
+      if (response.status === 200 && response.data.image) {
+        setUserInfo({ ...userInfo, image: response.data.image });
+        setImage(`${HOST}/${response.data.image}`);
+        toast.success("Image Updated");
+      }
+    }
+  };
+
+  const handleDeleteImage = async () => {
+    try {
+      const response = await apiClient.delete(REMOVE_PROFILE_IMAGE_ROUTE, {
+        withCredentials: true,
+      });
+      if (response.status === 200) {
+        setUserInfo({ ...userInfo, image: null });
+        setImage(null);
+        toast.success("Image Deleted");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div className='bg-[151515] bg-opacity-15'>
-      <div className="min-h-screen flex items-center justify-center " style={{ backgroundImage: `url(${Background})`, backgroundSize:'1500px' }}>
+    <div className="bg-[151515] bg-opacity-15">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: `url(${Background})`, backgroundSize: '1500px' }}>
         <div className="flex flex-col gap-8 w-[90vw] md:w-[40vw] lg:w-[30vw] p-8 bg-[#151515] shadow-2xl shadow-[#0f0f0f] rounded-lg">
           <div className="text-center text-white">
             <h1 className="text-3xl">Hello {firstName} {lastName}!</h1>
@@ -97,7 +137,10 @@ const Profile = () => {
                 )}
               </Avatar>
               {hovered && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full">
+                <div
+                  className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full"
+                  onClick={image ? handleDeleteImage : handleFileInputClick}
+                >
                   {image ? (
                     <FaTrash className="text-white text-3xl cursor-pointer" />
                   ) : (
@@ -105,13 +148,19 @@ const Profile = () => {
                   )}
                 </div>
               )}
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                onChange={handleImageChange}
+                name="profile-image"
+                accept=".png, .jpg, .jpeg, .svg, .webp"
+              />
             </div>
             <div className="grid grid-cols-4 gap-4">
               {colors.map((color, index) => (
                 <div
-                  className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 ${
-                    selectedColor === index ? "outline outline-white/75 outline-2" : ""
-                  }`}
+                  className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 ${selectedColor === index ? "outline outline-white/75 outline-2" : ""}`}
                   key={index}
                   onClick={() => setSelectedColor(index)}
                 ></div>
@@ -154,7 +203,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </div>  
+    </div>
   );
 };
 
