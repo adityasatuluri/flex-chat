@@ -1,4 +1,4 @@
-# My Project
+# ![FlexChat-logo](https://github.com/user-attachments/assets/11f1d077-af80-4d9d-9e15-4ff034fa01c5)
 
 This project is a full-stack application built with React, Node.js, Express, and MongoDB. The frontend is managed using Vite, and the backend handles authentication, user profile management, and other API routes.
 
@@ -36,8 +36,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Running the Project
 
-1. **Start the server:**
-    - Add "dev": "nodemon index.js" in "sctipts" of the package.json file and run the below command
+1. **Start the server:** Add ` **"dev":** **"nodemon index.js" ` in ` "scripts"* ` of the ` _package.json_ `  file and run the below command
     ```bash 
     cd server
     npm run dev
@@ -75,7 +74,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Environment Variables
 
-Create a `.env` file in the `server` directory and add the following variables:
+Modify the `.env` file in the `server` directory by changing the following variables:
 
  - MONGO_URI=your_mongodb_uri
  - JWT_KEY=your_jwt_secret_key
