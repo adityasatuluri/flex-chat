@@ -36,7 +36,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Running the Project
 
-1. **Start the server:** Add ` **"dev":** **"nodemon index.js" ` in ` "scripts"* ` of the ` _package.json_ `  file and run the below command
+1. **Start the server:** Add `"dev": "nodemon index.js" ` in ` "scripts" ` of the ` _package.json_ `  file and run the below command
     ```bash 
     cd server
     npm run dev
