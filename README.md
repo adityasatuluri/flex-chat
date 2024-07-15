@@ -92,3 +92,5 @@ Modify the `.env` file in the `server` directory by changing the following varia
 - Ensure MongoDB is running and accessible from your development environment.
 - Update any relevant configurations in the client and server as needed.
 
+## Developed by
+- Aditya Satuluri
