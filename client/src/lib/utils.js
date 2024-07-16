@@ -15,9 +15,18 @@ export const colors = [
   "bg-[#fb56072a] text-[#fb5607] border-[1px] border-[#fb5607bb]",
   "bg-[#9b5de52a] text-[#9b5de5] border-[1px] border-[#9b5de5bb]",
   "bg-[#f15bb52a] text-[#f15bb5] border-[1px] border-[#f15bb5bb]",
-
-
 ];
+
+export const bgThemes = [
+  "bg-[#00BB00]", //Primary
+  "bg-[#0B0C0B]", //Dark
+  "bg-[#101110]", //Dark Dark
+  "bg-[#181C18]" //Dark Light
+]
+
+export const textThemes = [
+  "text-[#17D617]"
+]
 
 export const getColor = (color) => {
   if (color >= 0 && color < colors.length) {

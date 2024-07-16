@@ -1,8 +1,10 @@
+import { bgThemes } from "@/lib/utils";
+import ProfileInfo from "./components/profile-info";
 
 
 function ContactsContainer() {
   return (
-    <div className="relative md:w-[35vw] lg:w-[30vw] xl:w-[20x] bg-[#1b1c24] border-r-2 border-[#2f303b] w-full">
+    <div className={`relative md:w-[35vw] lg:w-[30vw] xl:w-[20x] ${bgThemes[1]} border-r-2 border-[#2f303b] w-full`}>
       <div className="pt-3">
         <Logo />
       </div>
@@ -17,6 +19,7 @@ function ContactsContainer() {
           <Title text="Channels" />
         </div>
       </div>
+      <ProfileInfo />
     </div>
   )
 }

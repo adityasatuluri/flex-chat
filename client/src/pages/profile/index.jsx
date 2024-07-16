@@ -111,7 +111,7 @@ const Profile = () => {
   return (
     <div className="bg-[151515] bg-opacity-15">
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: `url(${Background})`, backgroundSize: '1500px' }}>
-        <div className="flex flex-col gap-8 w-[90vw] md:w-[40vw] lg:w-[30vw] p-8 bg-[#151515] shadow-2xl shadow-[#0f0f0f] rounded-lg">
+        <div className="flex flex-col gap-8 w-[90vw] md:w-[40vw] lg:w-[30vw] p-8 bg-[#151515] shadow-2xl shadow-[#0f0f0f] rounded-lg opacity-85 backdrop-blur-lg">
           <div className="text-center text-white">
             <h1 className="text-3xl">Hello {firstName} {lastName}!</h1>
           </div>
