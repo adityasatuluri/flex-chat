@@ -42,6 +42,8 @@ const setupSocket = (server) => {
   };
 
   io.on("connection", (socket) => {
+    console.log("New client connected");
+
     const userId = socket.handshake.query.userId;
 
     if (userId) {
@@ -53,6 +55,22 @@ const setupSocket = (server) => {
 
     socket.on("sendMessage", sendMessage);
     socket.on("disconnect", () => disconnect(socket));
+
+    socket.on("error", (error) => {
+      console.error("Socket Error:", error);
+    });
+
+    socket.on("connect_error", (error) => {
+      console.error("Connect Error:", error);
+    });
+
+    socket.on("reconnect_attempt", (attemptNumber) => {
+      console.log("Reconnect Attempt:", attemptNumber);
+    });
+
+    socket.on("reconnect", (attemptNumber) => {
+      console.log("Reconnected:", attemptNumber);
+    });
   });
 };
 

@@ -25,7 +25,7 @@ const messageSchema = new mongoose.Schema({
   fileUrl: {
     type: String,
     required: function () {
-      return this.messageType === "text";
+      return this.messageType === "file";
     },
   },
   timestamp: {
