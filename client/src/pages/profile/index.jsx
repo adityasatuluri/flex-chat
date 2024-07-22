@@ -1,16 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { FaPlus, FaTrash } from "react-icons/fa";
-import { toast } from 'sonner';
-import { useAppStore } from '@/store';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { getColor, colors } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { apiClient } from '@/lib/api-client';
-import { ADD_PROFILE_IMAGE_ROUTE, HOST, REMOVE_PROFILE_IMAGE_ROUTE, UPDATE_PROFILE_ROUTE } from '@/utils/constants';
-import Background from '@/assets/flogo-short.svg';
+import { toast } from "sonner";
+import { useAppStore } from "@/store";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { getColor, colors } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { apiClient } from "@/lib/api-client";
+import {
+  ADD_PROFILE_IMAGE_ROUTE,
+  HOST,
+  REMOVE_PROFILE_IMAGE_ROUTE,
+  UPDATE_PROFILE_ROUTE,
+} from "@/utils/constants";
+import Background from "@/assets/flogo-short.svg";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -104,16 +109,25 @@ const Profile = () => {
         toast.success("Image Deleted");
       }
     } catch (err) {
+      setImage(null);
       console.log(err);
     }
   };
 
   return (
     <div className="bg-[151515] bg-opacity-15">
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: `url(${Background})`, backgroundSize: '1500px' }}>
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{
+          backgroundImage: `url(${Background})`,
+          backgroundSize: "1500px",
+        }}
+      >
         <div className="flex flex-col gap-8 w-[90vw] md:w-[40vw] lg:w-[30vw] p-8 bg-[#151515] shadow-2xl shadow-[#0f0f0f] rounded-lg opacity-85 backdrop-blur-lg">
           <div className="text-center text-white">
-            <h1 className="text-3xl">Hello {firstName} {lastName}!</h1>
+            <h1 className="text-3xl">
+              Hello {firstName} {lastName}!
+            </h1>
           </div>
           <div className="flex flex-col items-center gap-6">
             <div
@@ -130,7 +144,9 @@ const Profile = () => {
                   />
                 ) : (
                   <div
-                    className={`uppercase h-24 w-24 md:w-32 md:h-32 text-3xl border-[1px] flex items-center justify-center rounded-full ${getColor(selectedColor)}`}
+                    className={`uppercase h-24 w-24 md:w-32 md:h-32 text-3xl border-[1px] flex items-center justify-center rounded-full ${getColor(
+                      selectedColor
+                    )}`}
                   >
                     {firstName ? firstName.charAt(0) : userInfo.email.charAt(0)}
                   </div>
@@ -160,7 +176,11 @@ const Profile = () => {
             <div className="grid grid-cols-4 gap-4">
               {colors.map((color, index) => (
                 <div
-                  className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 ${selectedColor === index ? "outline outline-white/75 outline-2" : ""}`}
+                  className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 ${
+                    selectedColor === index
+                      ? "outline outline-white/75 outline-2"
+                      : ""
+                  }`}
                   key={index}
                   onClick={() => setSelectedColor(index)}
                 ></div>
@@ -191,7 +211,10 @@ const Profile = () => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <div onClick={handleNavigate} className="h-12 p-3 items-center rounded-md mr-4 bg-[#32CD32] hover:bg-[#197419] transition-all duration-300">
+            <div
+              onClick={handleNavigate}
+              className="h-12 p-3 items-center rounded-md mr-4 bg-[#32CD32] hover:bg-[#197419] transition-all duration-300"
+            >
               <IoArrowBack className="text-2xl text-black hover:text-white transition-all duration-300 cursor-pointer" />
             </div>
             <Button

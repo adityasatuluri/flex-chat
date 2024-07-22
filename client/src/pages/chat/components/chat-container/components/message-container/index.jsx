@@ -68,15 +68,17 @@ const MessageContainer = () => {
       // Added 'return'
       <div
         className={`${
-          message.sender === selectedChatData._id ? "text-left" : "text-right"
+          message.sender === selectedChatData._id
+            ? "text-left rounded-tl-lg rounded-tr-lg rounded-bl-lg"
+            : "text-right "
         }`}
       >
         {message.messageType === "text" && (
           <div
             className={`${
               message.sender !== selectedChatData._id
-                ? "bg-[#8417ff/5] text-white/80 border-[#8417ff/50]"
-                : "bg-[#2a2b33/5] text-[#2a2b33/90] border-[#ffffff/20]"
+                ? "bg-[#2a2b33/5] text-white/80 border-[#8417ff/50] rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl"
+                : "bg-[#00ff04] bg-opacity-10 text-[#2a2b33/90] border-[#ffffff/20] rounded-tr-2xl rounded-bl-2xl rounded-br-2xl"
             } border inline-block p-4 rounded my-1 max-w-[50%] break-words`}
           >
             {message.content}
