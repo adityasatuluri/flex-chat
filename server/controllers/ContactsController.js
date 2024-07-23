@@ -42,8 +42,48 @@ export const getContactsForDMList = async (request, response, next) => {
     const contacts = await Message.aggregate([
       {
         $match: {
-          $or: [],
+          $or: [{ sender: userId }, { recipient: userId }],
         },
+      },
+      {
+        $sort: { timestamp: -1 },
+      },
+      {
+        $group: {
+          _id: {
+            $cond: {
+              if: { $eq: ["$sender", userId] },
+              then: "$recipient",
+              else: "sender",
+            },
+          },
+          lastMessageTime: { $first: "$timestamp" },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "contactInfo",
+        },
+      },
+      {
+        $unwind: "$contactInfo",
+      },
+      {
+        $project: {
+          _id: 1,
+          lastMessageTime: 1,
+          email: "$contactInfo.email",
+          firstName: "$contactInfo.firstName",
+          lastName: "$contactInfo.lastName",
+          image: "$contactInfo.image",
+          color: "$contactInfo.color",
+        },
+      },
+      {
+        $sort: { lastMessageTime: -1 },
       },
     ]);
 

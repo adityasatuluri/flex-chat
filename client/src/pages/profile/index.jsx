@@ -61,6 +61,7 @@ const Profile = () => {
         if (response.status === 200 && response.data) {
           setUserInfo({ ...response.data });
           toast.success("Profile Updated Successfully!");
+          console.log(response.data);
           navigate("/chat");
         }
       } catch (err) {
