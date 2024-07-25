@@ -6,9 +6,12 @@ import { RiEmojiStickerLine } from "react-icons/ri";
 import { bgThemes } from "@/lib/utils";
 import { useAppStore } from "@/store";
 import { useSocket } from "@/context/SocketContext";
+import { apiClient } from "@/lib/api-client";
+import { UPLOAD_FILE_ROUTE } from "@/utils/constants";
 
 const MessageBar = () => {
   const { selectedChatType, selectedChatData, userInfo } = useAppStore();
+  const fileInputRef = useRef();
   const socket = useSocket();
   const [message, setMessage] = useState("");
   const emojiRef = useRef();
@@ -45,6 +48,39 @@ const MessageBar = () => {
     setMessage((msg) => msg + emoji.emoji);
   };
 
+  const handleAttachmentClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleAttachmentChange = async () => {
+    try {
+      const file = event.target.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const response = await apiClient.post(UPLOAD_FILE_ROUTE, formData, {
+          withCredentials: true,
+        });
+
+        if (response.status === 200 && response.data) {
+          if (selectedChatType === "contact") {
+            socket.emit("sendMessage", {
+              sender: userInfo.id,
+              content: undefined,
+              recipient: selectedChatData._id,
+              messageType: "file",
+              fileUrl: response.data.filePath,
+            });
+          }
+        }
+      }
+    } catch (err) {
+      console.log({ error });
+    }
+  };
+
   return (
     <div
       className={`h-[10vh] ${bgThemes[2]} flex justify-center items-center px-8 mb-6 gap-6`}
@@ -57,7 +93,10 @@ const MessageBar = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button className="text-neutral-500 focus:border-none focus:outline-none focus:text-white duration-300 transition-all">
+        <button
+          className="text-neutral-500 focus:border-none focus:outline-none focus:text-white duration-300 transition-all"
+          onClick={handleAttachmentClick}
+        >
           <GrAttachment className="text-2xl" />
         </button>
         <div className="relative">
@@ -67,6 +106,13 @@ const MessageBar = () => {
           >
             <RiEmojiStickerLine className="text-2xl" />
           </button>
+          <input
+            type="file"
+            className="hidden"
+            ref={fileInputRef}
+            onChange={handleAttachmentChange}
+          />
+
           <div className="absolute bottom-16 right-0 " ref={emojiRef}>
             <EmojiPicker
               theme="dark"
