@@ -15,42 +15,44 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone https://github.com/adityasatuluri/flex-chat.git
-    cd flex-chat
-    ```
+   ```bash
+   git clone https://github.com/adityasatuluri/flex-chat.git
+   cd flex-chat
+   ```
 
 2. **Install server dependencies:**
 
-    ```bash
-    cd server
-    npm install
-    ```
+   ```bash
+   cd server
+   npm install
+   ```
 
 3. **Install client dependencies:**
 
-    ```bash
-    cd ../client
-    npm install
-    ```
+   ```bash
+   cd ../client
+   npm install
+   ```
 
 ### Running the Project
 
-1. **Start the server:** Add `"dev": "nodemon index.js" ` in ` "scripts" ` of the ` _package.json_ `  file and run the below command
-    ```bash 
-    cd server
-    npm run dev
-    ```
+1. **Start the server:** Add `"dev": "nodemon index.js" ` in `"scripts"` of the `_package.json_` file and run the below command
 
-    The server will start on `http://localhost:6969`.
+   ```bash
+   cd server
+   npm run dev
+   ```
+
+   The server will start on `http://localhost:6969`.
 
 2. **Start the client:**
-    ```bash
-    cd ../client
-    npm run dev
-    ```
 
-    The client will start on `http://localhost:5173`.
+   ```bash
+   cd ../client
+   npm run dev
+   ```
+
+   The client will start on `http://localhost:5173`.
 
 ### Project Structure
 
@@ -60,6 +62,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 ### Stack
 
 - **Frontend:**
+
   - React
   - Vite
   - Tailwind CSS
@@ -74,23 +77,37 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Environment Variables
 
-Modify the `.env` file in the `server` directory by changing the following variables:
+Create a `.env` file in the `server` directory and set the following environment variables:
 
- - MONGO_URI=your_mongodb_uri
- - JWT_KEY=your_jwt_secret_key
+- `MONGO_URI=your_mongodb_uri`
+- `JWT_KEY=your_jwt_secret_key`
 
+### API Endpoints
 
-<!-- ### API Endpoints
+- **Authentication Routes:**
 
-- **POST** `/api/auth/signup` - User signup
-- **POST** `/api/auth/login` - User login
-- **GET** `/api/auth/user-info` - Get user information (requires token)
-- **POST** `/api/auth/update-profile` - Update user profile (requires token) !-->
+  - **POST** `/api/auth/signup` - User signup
+  - **POST** `/api/auth/login` - User login
+  - **GET** `/api/auth/user-info` - Get user information (requires token)
+  - **POST** `/api/auth/update-profile` - Update user profile (requires token)
+  - **POST** `/api/auth/add-profile-image` - Add profile image (requires token)
+  - **POST** `/api/auth/remove-profile-image` - Remove profile image (requires token)
+  - **POST** `/api/auth/log-out` - User logout
+
+- **Contacts Routes:**
+
+  - **GET** `/api/contacts/search` - Search contacts
+  - **GET** `/api/contacts/get-contacts-for-dm` - Get direct message contacts
+
+- **Messages Routes:**
+  - **GET** `/api/messages/get-messages` - Get all messages
+  - **POST** `/api/messages/upload-file` - Upload file
 
 ### Additional Information
 
 - Ensure MongoDB is running and accessible from your development environment.
 - Update any relevant configurations in the client and server as needed.
 
-## Developed by
-- Aditya Satuluri
+## 👨‍💻 Developed by
+
+- **Aditya Satuluri** 🚀
