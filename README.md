@@ -74,6 +74,9 @@ Follow these instructions to get a copy of the project up and running on your lo
   - MongoDB
   - JWT (JSON Web Tokens) for authentication
   - bcrypt for password hashing
+  - Socket.io for faciliating realtime connections
+  - Multer for file uploads
+  - zustand for state management
 
 ### Environment Variables
 
