@@ -1,9 +1,9 @@
-import { clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-import animationData  from "@/assets/lottie-json";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import animationData from "@/assets/lottie-json";
 
 export function cn(...inputs) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export const colors = [
@@ -21,12 +21,10 @@ export const bgThemes = [
   "bg-[#00BB00]", //Primary
   "bg-[#0B0C0B]", //Dark
   "bg-[#101110]", //Dark Dark
-  "bg-[#181C18]" //Dark Light
-]
+  "bg-[#181C18]", //Dark Light
+];
 
-export const textThemes = [
-  "text-[#17D617]"
-]
+export const textThemes = ["text-[#17D617]"];
 
 export const getColor = (color) => {
   if (color >= 0 && color < colors.length) {
@@ -36,7 +34,7 @@ export const getColor = (color) => {
 };
 
 export const animationDefaultOptions = {
-  loop:true,
-  autoplay:true,
+  loop: true,
+  autoplay: true,
   animationData,
-}
+};
