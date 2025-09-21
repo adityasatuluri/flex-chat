@@ -16,7 +16,7 @@ const databaseURL = process.env.DATABASE_URL;
 
 app.use(
   cors({
-    origin: process.env.ORIGIN, // Ensure this matches the client origin
+    origin: "http://localhost:5174", // must match frontend
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
