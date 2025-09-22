@@ -146,8 +146,6 @@ const Auth = () => {
             </Tabs>
           </div>
         </div>
-        <div className='hidden xl:block bg-cover rounded-3xl opacity-100' style={{ backgroundImage: `url(${Background})` }}></div>
-
       </div>
     </div>
   );
