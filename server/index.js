@@ -16,7 +16,7 @@ const databaseURL = process.env.DATABASE_URL;
 
 app.use(
   cors({
-    origin: "https://flexchat-frontend.onrender.com", // must match frontend
+    origin: process.env.ORIGIN, // must match frontend
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
